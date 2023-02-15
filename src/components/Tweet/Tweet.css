@@ -20,7 +20,7 @@
 .tweet .tweet-content {
 	display: flex;
 	flex-direction: column;
-	gap: 0.5 rem;
+	gap: 0.5rem;
 }
 
 .tweet .tweet-content .tweet-content-header {

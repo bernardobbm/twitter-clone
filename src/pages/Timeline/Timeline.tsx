@@ -3,6 +3,8 @@ import { Tweet } from '../../components/Tweet/Tweet';
 import { Header } from '../../components/Header/Header';
 import { Separator } from '../../components/Separator/Separator';
 
+const tweets = ['Meu primeiro tweet', 'Teste', 'Deu certo tweetar!'];
+
 export function Timeline() {
 	return (
 		<main className="timeline">
@@ -26,10 +28,9 @@ export function Timeline() {
 
 			<Separator />
 
-			<Tweet />
-			<Tweet />
-			<Tweet />
-			<Tweet />
+			{tweets.map((tweet) => {
+				return <Tweet content={tweet} />;
+			})}
 		</main>
 	);
 }

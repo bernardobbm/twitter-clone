@@ -2,15 +2,29 @@ import './Timeline.css';
 import { Tweet } from '../../components/Tweet/Tweet';
 import { Header } from '../../components/Header/Header';
 import { Separator } from '../../components/Separator/Separator';
+import { FormEvent, useState } from 'react';
 
-const tweets = ['Meu primeiro tweet', 'Teste', 'Deu certo tweetar!'];
+let newTweet = '';
 
 export function Timeline() {
+	const [newTweet, setNewTweet] = useState('');
+	const [tweets, setTweets] = useState(['Meu primeiro tweet', 'Teste', 'Deu certo tweetar!']);
+
+	function createNewTweet(event: FormEvent) {
+		event.preventDefault();
+
+		setTweets([...tweets, newTweet]);
+		setNewTweet('');
+	}
+
 	return (
 		<main className="timeline">
 			<Header title="Home" />
 
-			<form className="new-tweet-form">
+			<form
+				className="new-tweet-form"
+				onSubmit={createNewTweet}
+			>
 				<label htmlFor="tweet">
 					<img
 						src="https://github.com/bernardobbm.png"
@@ -20,6 +34,8 @@ export function Timeline() {
 					<textarea
 						id="tweet"
 						placeholder="What's happening?"
+						value={newTweet}
+						onChange={(event) => setNewTweet(event.target.value)}
 					/>
 				</label>
 
@@ -29,7 +45,12 @@ export function Timeline() {
 			<Separator />
 
 			{tweets.map((tweet) => {
-				return <Tweet content={tweet} />;
+				return (
+					<Tweet
+						key={tweet}
+						content={tweet}
+					/>
+				);
 			})}
 		</main>
 	);
